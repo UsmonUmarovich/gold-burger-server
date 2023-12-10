@@ -16,13 +16,9 @@ export function createProduct(img, title, desc, price) {
     desc,
     price,
   };
-  if (!img.trim() && !title.trim() && !desc.trim() && !price.trim()) {
-    return;
-  } else {
     products.insert(doc, (err, newDoc) => {
       console.log(err);
     });
-  }
 }
 
 export function deleteProduct(id) {
