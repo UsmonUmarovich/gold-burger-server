@@ -53,7 +53,7 @@ productsRoutes.get("/products/:id", (req, res) => {
   });
 });
 
-productsRoutes.post("/products/add", (req, res) => {
+productsRoutes.post("/products", (req, res) => {
   const { img, title, desc, price } = req.body;
   createProduct(img, title, desc, price);
   res.json({ message: "posted successfully" });
