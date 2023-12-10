@@ -1,5 +1,9 @@
 import { Router } from "express";
-import cart, { allProductsInCart, deleteProductInCart } from "../services/addToCart.service.js";
+import cart, {
+  allProductsInCart,
+  deleteAllProductsInCart,
+  deleteProductInCart,
+} from "../services/addToCart.service.js";
 import products from "../services/products.service.js";
 
 const addToCartRoutes = Router();
@@ -28,8 +32,13 @@ addToCartRoutes.post("/cart/:id", (req, res) => {
 });
 
 addToCartRoutes.delete("/cart/:id", (req, res) => {
-    deleteProductInCart(req.params.id)
-    res.json({message: "product deleted on cart"})
-})
+  deleteProductInCart(req.params.id);
+  res.json({ message: "product deleted on cart" });
+});
+
+addToCartRoutes.delete("/cart", (req, res) => {
+  deleteAllProductsInCart()
+  res.json({message: "all products in cart were deleted"})
+});
 
 export default addToCartRoutes;
