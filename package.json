@@ -1,11 +1,14 @@
 {
-  "name": "gold-burger(backend)",
+  "name": "gold-burger-backend",
   "version": "1.0.0",
   "description": "",
   "main": "sever.js",
   "type": "module",
+  "engines": {
+    "node": "18.x"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",
