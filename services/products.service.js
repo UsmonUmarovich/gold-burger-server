@@ -16,13 +16,17 @@ export function createProduct(img, title, desc, price) {
     desc,
     price,
   };
+  if (!img || !title || !desc || !price) {
+    return console.log("all of them are required");;
+  } else {
     products.insert(doc, (err, newDoc) => {
       console.log(err);
     });
+  }
 }
 
 export function deleteProduct(id) {
   products.remove({ _id: id });
 }
 
-export default products
+export default products;
