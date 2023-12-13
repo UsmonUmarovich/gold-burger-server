@@ -12,11 +12,11 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(productsRoutes)
-app.use(addToCartRoutes)
-app.use(Buy)
-app.use(LoginRoutes)
-app.use(registerRoutes)
+app.use(productsRoutes);
+app.use(addToCartRoutes);
+app.use(Buy);
+app.use(LoginRoutes);
+app.use(registerRoutes);
 
 app.listen(8080, () => {
   console.log("Server is running on http://localhost:8080");
