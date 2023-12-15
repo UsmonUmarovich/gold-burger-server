@@ -11,7 +11,7 @@ const _products = [];
 
 productsRoutes.get("/products", (req, res) => {
   allProducts((product) => {
-    res.json({ message: { product } });
+    res.json(product);
   });
 });
 

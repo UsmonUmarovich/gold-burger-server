@@ -11,7 +11,7 @@ const _cart = [];
 
 addToCartRoutes.get("/cart", (req, res) => {
   allProductsInCart((productsInCart) => {
-    res.json({ message: productsInCart });
+    res.json(productsInCart);
   });
 });
 
