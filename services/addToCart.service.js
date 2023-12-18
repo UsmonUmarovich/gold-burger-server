@@ -16,7 +16,7 @@ export function deleteProductInCart(id) {
 export function deleteAllProductsInCart(callback){
   cart.remove({}, {multi: true}, (err, alldeleted) => {
     if(err){
-      console.log(err);
+      console.log(err);z
     }else{
       console.log(`deleted ${alldeleted}`);
     }

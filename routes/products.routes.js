@@ -15,26 +15,30 @@ productsRoutes.get("/products", (req, res) => {
   });
 });
 
-productsRoutes.put("/products/:id", (req, res) => {
+productsRoutes.put('/products/:id', (req, res) => {
   const id = req.params.id;
   const document = req.body;
 
-  products.update(
-    { _id: id },
-    document,
-    { upsert: true },
-    (err, numReplaced, upsert) => {
-      if (err) {
-        res.status(500).json({ error: err });
+  // Check if the request body is empty or doesn't contain valid data
+  if (!document || Object.keys(document).length === 0) {
+    return res.status(400).json({ error: 'Request body is empty or invalid' });
+  }
+
+  products.update({ _id: id }, { $set: document }, {}, (err, numReplaced, upsert) => {
+    if (err) {
+      res.status(500).json({ error: err });
+    } else {
+      if (numReplaced === 0 && !upsert) {
+        res.status(404).json({ message: 'Product not found' });
       } else {
         if (upsert) {
-          res.status(201).json({ message: "Product inserted successfully" });
+          res.status(201).json({ message: 'Product inserted successfully' });
         } else {
-          res.json({ message: "Product updated successfully" });
+          res.json({ message: 'Product updated successfully' });
         }
       }
     }
-  );
+  });
 });
 
 productsRoutes.get("/products/:id", (req, res) => {
