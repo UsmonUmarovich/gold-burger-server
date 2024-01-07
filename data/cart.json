@@ -1,7 +1,2 @@
-{"_id":"SIFYCsEhIoK36FIi","products":[{"document":{"img":"dsa","title":"ads","desc":"asd","price":"32123123","_id":"6b5BQxo47OnzPe7d"}}]}
-{"_id":"SIFYCsEhIoK36FIi","products":[{"document":{"img":"dsa","title":"ads","desc":"asd","price":"32123123","_id":"6b5BQxo47OnzPe7d"}},{"document":{"img":"dsa","title":"dsa","desc":"dsa","price":"231","_id":"esXWUwJqmzds4CXl"}}]}
-{"_id":"66Xr5cHnzbNCTAT3","products":[{"document":{"img":"dsa","title":"dsa","desc":"dsa","price":"231","_id":"esXWUwJqmzds4CXl"}}]}
-{"_id":"nrV9Pfl88hbrkeoT","products":[{"document":{"img":"dsa","title":"dsa","desc":"dsa","price":"231","_id":"esXWUwJqmzds4CXl"}}]}
-{"_id":"66Xr5cHnzbNCTAT3","products":[{"document":{"img":"dsa","title":"dsa","desc":"dsa","price":"231","_id":"esXWUwJqmzds4CXl"}},{"document":{"img":"dsa","title":"ads","desc":"asd","price":"32123123","_id":"6b5BQxo47OnzPe7d"}}]}
-{"_id":"nrV9Pfl88hbrkeoT","products":[{"document":{"img":"dsa","title":"dsa","desc":"dsa","price":"231","_id":"esXWUwJqmzds4CXl"}},{"document":{"img":"dsa","title":"ads","desc":"asd","price":"32123123","_id":"6b5BQxo47OnzPe7d"}}]}
-{"$$deleted":true,"_id":"66Xr5cHnzbNCTAT3"}
+{"username":"usmon","user":{"username":"usmon","password":"1234","name":"Usmon","surname":"Reyimberganov","_id":"AwxmI3FfF1sUJEg9"},"products":[{"img":"dsa","title":"ads","desc":"asd","price":"32123123","_id":"6b5BQxo47OnzPe7d"}],"_id":"Jcxd5qfrz2b9SPPe"}
+{"$$deleted":true,"_id":"Jcxd5qfrz2b9SPPe"}

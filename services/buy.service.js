@@ -10,27 +10,4 @@ export function AllBoughtProducts(callback) {
   });
 }
 
-export function BuyProductsWithAOA(name, surname, phone, address, comment) {
-  const doc = {
-    name,
-    surname,
-    phone,
-    address,
-    comment,
-  };
-
-  cart.find({}, (err, document) => {
-    if (err) {
-      console.log(err);
-    } else {
-      if (document) {
-        buy.insert([doc, document], (err, newDocs) => {
-          console.log("successfully bought products", newDocs);
-        })
-        deleteAllProductsInCart()
-      }
-    }
-  });
-}
-
 export default buy;

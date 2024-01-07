@@ -3,73 +3,93 @@ import cart, {
   allProductsInCart,
   deleteAllProductsInCart,
   deleteProductInCart,
+  deleteProductInCartByUsername,
 } from "../services/addToCart.service.js";
 import products from "../services/products.service.js";
+import users from "../services/register.service.js";
 
 const addToCartRoutes = Router();
 const _cart = [];
 
 addToCartRoutes.get("/cart", (req, res) => {
-  allProductsInCart((productsInCart) => {
-    res.json({ message: productsInCart });
+  allProductsInCart((allProductsInCart) => {
+    res.json(allProductsInCart);
   });
 });
 
-addToCartRoutes.post("/cart/:id", (req, res) => {
+addToCartRoutes.get("/cart/:id", (req, res) => {
+  const id = req.params.id;
+
+  cart.findOne({ _id: id }, (err, document) => {
+    if (err) {
+      res.status(500).json({ error: err });
+    } else {
+      if (document) {
+        res.json(document);
+      } else {
+        res.status(404).json({ message: "Cart not found" });
+      }
+    }
+  });
+});
+
+addToCartRoutes.post("/cart/:username/:id", (req, res) => {
   const id = req.params.id;
   const { _id } = req.params;
+  const username = req.params.username;
 
   // Create or load the user's cart from the database
   cart.findOne({ _id }, (err, userCart) => {
     products.findOne({ _id: id }, (err, document) => {
-      if (err) {
-        res.status(500).json({ error: "Internal server error" });
-        return;
-      }
+      users.findOne({ username }, (err, user) => {
+        if (err) {
+          res.status(500).json({ error: "Internal server error" });
+          return;
+        }
 
-      if (!userCart) {
-        // If the user doesn't have a cart, create a new cart
-        const newCart = {
-          _id,
-          products: [{ document }],
-        };
+        if (!userCart) {
+          // If the user doesn't have a cart, create a new cart
 
-        // Insert the new cart into the database
-        cart.insert(newCart, (err, newDoc) => {
-          if (err) {
-            res.status(500).json({ error: "Failed to create cart" });
-            return;
-          }
-          res
-            .status(200)
-            .json({ message: "Product added to cart successfully" });
-        });
-      }
+          const newCart = {
+            username,
+            user,
+            products: [document],
+          };
+          // Insert the new cart into the databases
+          cart.insert(newCart, (err, newDoc) => {
+            if (err) {
+              res.status(500).json({ error: "Failed to create cart" });
+              return;
+            }
+            res.status(200).json(newDoc);
+          });
+        }
+      });
     });
   });
 });
 // first _id is cart's id. second id is product's id
-addToCartRoutes.post("/cart/:_id/:id", (req, res) => {
-  const { _id } = req.params;
+addToCartRoutes.put("/cart/:username/:id", (req, res) => {
+  const username = req.params.username;
   const id = req.params.id;
 
-  cart.findOne({ _id }, (err, userCart) => {
+  cart.findOne({ username }, (err, userCart) => {
     products.findOne({ _id: id }, (err, document) => {
       if (err) {
         res.status(500).json({ error: "Internal server error" });
         return;
       }
       // If the user already has a cart, update the cart items
-      userCart.products.push({ document });
+      userCart.products.push(document);
 
       // Update the user's cart in the database
-      cart.update({ _id }, userCart, {}, (err, numReplaced) => {
+      cart.update({ username }, userCart, {}, (err, numReplaced) => {
         if (err) {
           x;
           res.status(500).json({ error: "Failed to update cart" });
           return;
         }
-        res.status(200).json({ message: "Product added to cart successfully" });
+        res.status(200).json(numReplaced);
       });
     });
   });
@@ -77,12 +97,17 @@ addToCartRoutes.post("/cart/:_id/:id", (req, res) => {
 
 addToCartRoutes.delete("/cart/:id", (req, res) => {
   deleteProductInCart(req.params.id);
-  res.json({ message: "product deleted on cart" });
+  res.json({ message: "product deleted in cart" });
 });
 
 addToCartRoutes.delete("/cart", (req, res) => {
   deleteAllProductsInCart();
   res.json({ message: "all products in cart were deleted" });
+});
+
+addToCartRoutes.delete("/cart/delbyuser/:username", (req, res) => {
+  deleteProductInCartByUsername(req.params.username);
+  res.json({ message: "product deleted in cart by username" });
 });
 
 export default addToCartRoutes;

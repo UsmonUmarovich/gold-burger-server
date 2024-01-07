@@ -13,14 +13,19 @@ export function deleteProductInCart(id) {
   cart.remove({ _id: id });
 }
 
-export function deleteAllProductsInCart(callback){
-  cart.remove({}, {multi: true}, (err, alldeleted) => {
-    if(err){
-      console.log(err);z
-    }else{
+export function deleteProductInCartByUsername(username) {
+  cart.remove({ username: username });
+}
+
+export function deleteAllProductsInCart(callback) {
+  cart.remove({}, { multi: true }, (err, alldeleted) => {
+    if (err) {
+      console.log(err);
+      z;
+    } else {
       console.log(`deleted ${alldeleted}`);
     }
-  })
+  });
 }
 
 export default cart;

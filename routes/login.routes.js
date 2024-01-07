@@ -21,7 +21,7 @@ LoginRoutes.post("/login", (req, res) => {
       return res.status(401).json({ message });
     }
 
-    res.status(200).json({ message: "Login successful", user });
+    res.status(200).json(user);
   });
 });
 
