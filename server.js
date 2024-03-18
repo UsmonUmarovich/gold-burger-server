@@ -25,6 +25,12 @@ app.get("/comments", async (req, res) => {
     .catch((err) => res.status(500).json({ message: "Error: " + err }));
 });
 
+app.get("/comments/:id", async (req, res) => {
+  await Comments.findById(req.params.id)
+  .then((r) => res.json(r))
+  .catch((err) => res.status(500).json({ message: "Error: " + err }));
+});
+
 app.post("/comments", async (req, res) => {
   const comment = new Comments({
     comment: req.body.comment,
@@ -35,6 +41,24 @@ app.post("/comments", async (req, res) => {
       res.status(200).json({ message: "Comment posted successfully" })
     )
     .catch((err) => res.status(500).json({ message: "Error: " + err }));
+});
+
+app.post("/del-comment/:id", async (req, res) => {
+  await Comments.findByIdAndDelete(req.params.id)
+    .then(() =>
+      res.status(200).json({ message: "Comment deleted successfully " })
+    )
+    .catch((err) => res.status(500).json({ message: err }));
+});
+
+app.put("/put-comment/:id", async (req, res) => {
+  await Comments.findByIdAndUpdate(req.params.id, {
+    comment: req.body.comment,
+  })
+    .then(() =>
+      res.status(200).json({ message: "Comment updated successfully " })
+    )
+    .catch((err) => res.status(500).json({ message: err }));
 });
 app.get("/", (req, res) => {
   res.send("Hello World!");
