@@ -1,8 +1,7 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const cors = require("cors");
-const Comments = require("./models/comments.js");
-require("dotenv").config();
+import express from 'express';
+import mongoose from 'mongoose';
+import cors from 'cors';
+import Comments from './models/comments';
 
 const PORT = process.env.PORT || 3000;
 
